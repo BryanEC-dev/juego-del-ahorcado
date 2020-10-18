@@ -1,83 +1,14 @@
 import random
+import welcome
+import repository.words as words
+import utilities.secuence as secuence
 
-IMAGES = ['''
+# get the sequence of images of the game
+IMAGES = secuence.images()
 
-    +---+
-    |   |
-        |
-        |
-        |
-        |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-        |
-        |
-        |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-    |   |
-        |
-        |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-   /|   |
-        |
-        |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-   /|\  |
-        |
-        |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-   /|\  |
-    |   |
-        |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-   /|\  |
-    |   |
-   /    |
-        =========''', '''
-
-    +---+
-    |   |
-    O   |
-   /|\  |
-    |   |
-   / \  |
-        =========''', '''
-''']
-
-WORDS = [
-    'lavadora',
-    'secadora',
-    'sofa',
-    'gobierno',
-    'diputado',
-    'democracia',
-    'computadora',
-    'teclado'
-]
-
+# get the words to play
+myWords = words.conection()
+WORDS = myWords.getAllWords()
 
 def display_board(hidden_word, tries):
     print(IMAGES[tries])
@@ -174,8 +105,11 @@ def iterable():
         print(iter)
 
 if __name__ == '__main__':
-    print('BIENVENIDOS AL JUEGO DEL AHORCADO')
-    run()
+    welcome.welcome()
+    test()
+
+
+    
    
 
 
