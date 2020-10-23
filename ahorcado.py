@@ -30,38 +30,48 @@ def run():
     global word
     global hidden_word
     """ get a random word """
-    #randomWord = secuence.randomWord(WORDS)
-    word = 'lavaplatos' #randomWord[1]
+    randomWord = secuence.randomWord(WORDS)
+    word = randomWord[1]
     hidden_word = ['-'] * len(word)
 
 
     while True:
         display_board(hidden_word, tries)
-        option = int(input("""
-            1.Obtener una pista
-            2.Ingresar una letra o palabra   
-        """))
+        try:
+            option = int(input("""
+                1.Obtener una pista
+                2.Ingresar una letra o palabra   
+            """))
 
-        if option == 1:
+            if option == 1:
 
-            global numberHelp
-            if numberHelp == 3:
-                print("ya no tienes mas pistas")
-                enter = input("Presiona enter para continuar....")
+                global numberHelp
+                if numberHelp == 3:
+                    print("ya no tienes mas pistas")
+                    enter = input("Presiona enter para continuar....")
+                else:
+                    idx = numberHelp + 2  # 2 is added by the position of the tracks in the database
+                    print(randomWord[idx])
+                    enter = input("Presiona enter para continuar....")
+                    numberHelp += 1
+                    continue
+
+            elif option == 2:
+                enterLetter()
+                gameOver()
             else:
-                idx = numberHelp + 2
-                print(randomWord[idx])
-                enter = input("Presiona enter para continuar....")
-                numberHelp +=1
-                continue
-
-        elif option == 2:
-            enterLetter()
-        else:
-            print('La opción ingresada es incorrecta')
+                print('La opción ingresada es incorrecta')
+        except ValueError as error:
+            print('--- SOLO SE PUEDE INGRESAR NÚMEROS ---')
+            enter = input("Presiona enter para continuar....")
+       
 
         
 def enterLetter():
+    global tries
+    if numberHelp == 3:
+        tries = 6
+    
     letters = input("Ingrese una letra o una palabra: ")
 
     #TODO validar si la palabra ingresada no cuntiene caracteres no permitidos 
@@ -72,7 +82,7 @@ def enterLetter():
             pass
             # finde del juego
         else:
-            pass
+            tries += 1
             #aumenta el contador de errores
     else:
         verifyLetter(letters)
@@ -89,6 +99,7 @@ def verifyWord(letters):
 
 def verifyLetter(letter):
     global word
+    global tries
     # check if the letter has already been entered
     if len(lettersEntered) == 0:
         lettersEntered.append(letter)
@@ -100,8 +111,7 @@ def verifyLetter(letter):
             lettersEntered.append(letter)
     # validate if the letter is in the word
     print('la palabara es',word)
-    if (not letter in word ):
-        global tries
+    if (not letter in word ):        
         tries +=1
     else:
         replaceLetter(letter)
