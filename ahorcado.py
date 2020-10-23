@@ -1,4 +1,3 @@
-
 import welcome
 import repository.words as words
 import utilities.secuence as secuence
@@ -58,7 +57,8 @@ def run():
 
             elif option == 2:
                 enterLetter()
-                gameOver()
+                if gameOver():
+                    break
             else:
                 print('La opción ingresada es incorrecta')
         except ValueError as error:
@@ -91,7 +91,7 @@ def enterLetter():
 
 
 def verifyWord(letters):
-    if letters == words:
+    if letters == word:
         return True
     else:
         return False
@@ -110,7 +110,6 @@ def verifyLetter(letter):
         else:
             lettersEntered.append(letter)
     # validate if the letter is in the word
-    print('la palabara es',word)
     if (not letter in word ):        
         tries +=1
     else:
@@ -119,7 +118,7 @@ def verifyLetter(letter):
 
 
 def replaceLetter(letter):
-    print('enntrando a función')
+    print('entrando a función')
     global word
     global hidden_word
     wordTemporal = []
@@ -139,7 +138,10 @@ def gameOver():
          display_board(hidden_word, tries)
          print('')
          print('¡ Perdiste!, la palabra correcta era {}'.format(word))
+    
+    return True
          
+
 
                
 
