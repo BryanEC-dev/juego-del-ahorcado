@@ -1,3 +1,7 @@
+"""
+This little code belongs to an implementation of the classic game of hangman
+"""
+
 import welcome
 import repository.words as words
 import utilities.secuence as secuence
@@ -6,10 +10,11 @@ import utilities.secuence as secuence
 numberHelp = 0
 tries = 0
 lettersEntered = []
-repeated_letter = False
+repeatedLetter = False
 one_letter = ''
 word = ''
 hidden_word = ''
+
 # get the sequence of images of the game
 IMAGES = secuence.images()
 
@@ -17,6 +22,7 @@ IMAGES = secuence.images()
 myWords = words.conection()
 WORDS = myWords.getAllWords()
 
+# TODO separar a una clase para imprimir
 def display_board(hidden_word, tries):
     print(IMAGES[tries])
     print('')
@@ -28,11 +34,12 @@ def display_board(hidden_word, tries):
 def run():
     global word
     global hidden_word
-    """ get a random word """
+    global numberHelp
+    """ get a random word and the hidden word is created """
     randomWord = secuence.randomWord(WORDS)
     word = randomWord[1]
+    word = word.lower()
     hidden_word = ['-'] * len(word)
-
 
     while True:
         display_board(hidden_word, tries)
@@ -43,16 +50,14 @@ def run():
                 3.Salir
             """))
 
-            if option == 1:
-
-                global numberHelp
+            if option == 1:          
                 if numberHelp == 3:
                     print("ya no tienes mas pistas")
-                    enter = input("Presiona enter para continuar....")
+                    input("Presiona enter para continuar....")
                 else:
                     idx = numberHelp + 2  # 2 is added by the position of the tracks in the database
                     print(randomWord[idx])
-                    enter = input("Presiona enter para continuar....")
+                    input("Presiona enter para continuar....")
                     numberHelp += 1
                     continue
 
@@ -60,7 +65,7 @@ def run():
                 if enterLetter():
                     win()
                     break
-
+                
                 if gameOver():
                     break
             elif option == 3:
@@ -69,26 +74,25 @@ def run():
                 print('La opción ingresada es incorrecta')
         except ValueError as error:
             print('--- SOLO SE PUEDE INGRESAR NÚMEROS ---')
-            enter = input("Presiona enter para continuar....")
+            input("Presiona enter para continuar....")
        
 
-        
+# it is verified if the word or letter I entered is correct
 def enterLetter():
     global tries
     if numberHelp == 3:
         tries = 6
     
     letters = input("Ingrese una letra o una palabra: ")
+    letters = letters.lower()
 
     #TODO validar si la palabra ingresada no cuntiene caracteres no permitidos 
 
     if len(letters) > 1:
         won = verifyWord(letters)
         if won == True:
-            print('palabra completa')
             return True
         else:
-            print('Suma un intento')
             tries += 1
             return False
     else:
@@ -111,35 +115,35 @@ def verifyWord(letters):
 def verifyLetter(letter):
     global word
     global tries
+    global repeatedLetter
+    repeatedLetter = False
     # check if the letter has already been entered
     if len(lettersEntered) == 0:
         lettersEntered.append(letter)
     else:
         if letter in lettersEntered:
             print("La letra ya fue ingresada.")
-            # debería detenerse el flujo
+            repeatedLetter = True
         else:
             lettersEntered.append(letter)
-    # validate if the letter is in the word
-    if (not letter in word ):        
-        tries +=1
-    else:
-        replaceLetter(letter)
+    if not repeatedLetter:
+        # validate if the letter is in the word
+        if (not letter in word ):        
+            tries +=1
+            print('La letra "{}" no se encuentra en la palabra. '.format(letter))
+        else:
+            replaceLetter(letter)
         
         
-
-
 def replaceLetter(letter):
     global word
     global hidden_word
-    wordTemporal = []
     for index, x in enumerate(word):
         if x == letter:
             hidden_word[index] = letter
-    #hidden_word = wordTemporal.copy()
+    
             
-
-
+# is validated if you missed all your chances
 def gameOver():
     if tries == 7:
          display_board(hidden_word, tries)
@@ -154,71 +158,6 @@ def win():
     print('¡Felicitaciones! Ganaste!!!! La palabra es: {}'.format(word))
          
 
-def core():
-    """ current_letter = str(input('Ingresa una letra: '))
-
-        # comentario validar si ingreso la palabra correcta
-       if len(current_letter) > 1:
-            print('ingresaste la palabra: {}'.format(current_letter))
-            if current_letter == word:
-               print('')
-               print('Felicidades')
-               print('¡Felicitaciones! ganaste, la palabra es: {}'.format(word))
-               break
-            else:
-                """  """
-                tries += 1
-
-                if tries == 7:
-                    display_board(hidden_word, tries)
-                    print('')
-                    print('¡ Perdiste!, la palabra correcta era {}'.format(word))
-                    break
-        else:
-            one_letter = current_letter[0]
-
-        print(one_letter)
-        # comentario  one_letter = current_letter[0]
-         # comentario Validar si la letra ya ha sido ingreada
-        for l in letters:
-            print('{} no es igual a {}'.format(one_letter, letters))
-            if one_letter == l:
-               print("Esta letra ya ha sido ingresada, ingrese una nueva letra")
-               repeated_letter = True
-               break
-
-        if repeated_letter == True:
-            repeated_letter = False
-            continue
-
-        print('continue con el flujo')
-        letter_indexes = []
-        for idx in range(len(word)):
-            if word[idx] == current_letter:
-                letter_indexes.append(idx)
-
-        if len(letter_indexes) == 0:
-            tries += 1
-
-            if tries == 7:
-                display_board(hidden_word, tries)
-                print('')
-                print('¡ Perdiste!, la palabra correcta era {}'.format(word))
-                break
-        else:
-            for idx in letter_indexes:
-                hidden_word[idx] = current_letter
-            letter_indexes = []
-
-        try:
-            hidden_word.index('-')
-        except ValueError:
-            print('')
-            print('Felicidades')
-            print('¡Felicitaciones! ganaste, la palabra es: {}'.format(word))
-            break
-
-        letters.append(one_letter) """
 
 if __name__ == '__main__':
     welcome.welcome()
