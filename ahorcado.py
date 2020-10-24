@@ -40,6 +40,7 @@ def run():
             option = int(input("""
                 1.Obtener una pista
                 2.Ingresar una letra o palabra   
+                3.Salir
             """))
 
             if option == 1:
@@ -56,9 +57,14 @@ def run():
                     continue
 
             elif option == 2:
-                enterLetter()
+                if enterLetter():
+                    win()
+                    break
+
                 if gameOver():
                     break
+            elif option == 3:
+                break
             else:
                 print('La opción ingresada es incorrecta')
         except ValueError as error:
@@ -79,14 +85,19 @@ def enterLetter():
     if len(letters) > 1:
         won = verifyWord(letters)
         if won == True:
-            pass
-            # finde del juego
+            print('palabra completa')
+            return True
         else:
+            print('Suma un intento')
             tries += 1
-            #aumenta el contador de errores
+            return False
     else:
         verifyLetter(letters)
-        pass
+        if not '-' in hidden_word:
+           return True
+        else:
+            return False
+        
 
 
 
@@ -114,22 +125,18 @@ def verifyLetter(letter):
         tries +=1
     else:
         replaceLetter(letter)
-        pass
+        
+        
 
 
 def replaceLetter(letter):
-    print('entrando a función')
     global word
     global hidden_word
     wordTemporal = []
-
-    for x in word:
+    for index, x in enumerate(word):
         if x == letter:
-            wordTemporal.append(letter)
-        else:
-            wordTemporal.append('-')
-    
-    hidden_word = wordTemporal
+            hidden_word[index] = letter
+    #hidden_word = wordTemporal.copy()
             
 
 
@@ -138,19 +145,14 @@ def gameOver():
          display_board(hidden_word, tries)
          print('')
          print('¡ Perdiste!, la palabra correcta era {}'.format(word))
-    
-    return True
+         return True
+    else:
+        return False
+
+def win():
+    print('')
+    print('¡Felicitaciones! Ganaste!!!! La palabra es: {}'.format(word))
          
-
-
-               
-
-def iterable():
-    lista = ['a', 'b' , 'c' , 'd']
-
-    for iter in lista:
-        print(iter)
-
 
 def core():
     """ current_letter = str(input('Ingresa una letra: '))
