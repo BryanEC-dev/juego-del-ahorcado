@@ -1,4 +1,5 @@
-"""  """
+
+
 
 def welcome():
     print('-------------------------------------')
@@ -15,3 +16,21 @@ def welcome():
     print('3. Si luego de solicitar tres pistas no adivinas la palabra perderas')
 
     print("\n Suerte....")   
+
+
+def display_board(hidden_word, tries,IMAGES):
+    print(IMAGES[tries])
+    print('')
+    print(hidden_word)
+    print('----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+')
+
+def message(win,word):
+    """
+    docstring
+    """
+    if win:
+        print('')
+        print('¡Felicitaciones! Ganaste!!!! La palabra es: {}'.format(word))
+    else:
+        print('')
+        print('¡ Perdiste!, la palabra correcta era {}'.format(word))
