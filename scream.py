@@ -2,6 +2,8 @@
  Functions that display information on the screen
 """
 
+from config.configuration import config
+
 
 def welcome():
     print('-------------------------------------')
@@ -28,8 +30,8 @@ def display_board(hidden_word: str, tries: int, images: list) -> None:
     :param images:
     :return:
     """
-    print('')
-    display_lives(7, tries)
+    
+    display_lives(int(config.get('VARIABLES','TRIES')), tries)
     print(images[tries])
     print('')
     print(hidden_word)

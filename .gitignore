@@ -4,3 +4,5 @@ venv/
 utilities/__pycache__/
 repository/__pycache__/
 .vscode/
+.env
+.config/properties.conf
