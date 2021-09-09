@@ -2,7 +2,7 @@
 This little code belongs to an implementation of the classic game of hangman
 """
 
-import scream
+from scream import welcome, display_board, message
 import repository.words as words
 import utilities.secuence as secuence
 
@@ -33,7 +33,7 @@ def run():
     hidden_word = ['-'] * len(word)
 
     while True:
-        scream.display_board(hidden_word, tries, IMAGES)
+        display_board(hidden_word, tries, IMAGES)
         try:
             option = int(input("""
                 1.Obtener una pista
@@ -135,17 +135,17 @@ def replaceLetter(letter):
 # is validated if you missed all your chances
 def gameOver():
     if tries == 7:
-        scream.display_board(hidden_word, tries, IMAGES)
-        scream.message(False, word)
+        display_board(hidden_word, tries, IMAGES)
+        message(False, word)
         return True
     else:
         return False
 
 
 def win():
-    scream.message(True, word)
+    message(True, word)
 
 
 if __name__ == '__main__':
-    scream.welcome()
+    welcome()
     run()
