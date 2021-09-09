@@ -6,7 +6,6 @@ import scream
 import repository.words as words
 import utilities.secuence as secuence
 
-
 numberHelp = 0
 tries = 0
 lettersEntered = []
@@ -29,7 +28,7 @@ def run():
     global numberHelp
     """ get a random word and the hidden word is created """
     randomWord = secuence.randomWord(WORDS)
-    word = randomWord[1]
+    word = randomWord[0]
     word = word.lower()
     hidden_word = ['-'] * len(word)
 
@@ -42,12 +41,12 @@ def run():
                 3.Salir
             """))
 
-            if option == 1:          
+            if option == 1:
                 if numberHelp == 3:
                     print("ya no tienes mas pistas")
                     input("Presiona enter para continuar....")
                 else:
-                    idx = numberHelp + 2  # 2 is added by the position of the tracks in the database
+                    idx = numberHelp + 1  # 2 is added by the position of the tracks in the database
                     print(randomWord[idx])
                     input("Presiona enter para continuar....")
                     numberHelp += 1
@@ -57,7 +56,7 @@ def run():
                 if enterLetter():
                     win()
                     break
-                
+
                 if gameOver():
                     break
             elif option == 3:
@@ -67,18 +66,18 @@ def run():
         except ValueError as error:
             print('--- SOLO SE PUEDE INGRESAR NÚMEROS ---')
             input("Presiona enter para continuar....")
-       
+
 
 # it is verified if the word or letter I entered is correct
 def enterLetter():
     global tries
     if numberHelp == 3:
         tries = 6
-    
+
     letters = input("Ingrese una letra o una palabra: ")
     letters = letters.lower()
 
-    #TODO validar si la palabra ingresada no cuntiene caracteres no permitidos 
+    # TODO validar si la palabra ingresada no cuntiene caracteres no permitidos
 
     if len(letters) > 1:
         won = verifyWord(letters)
@@ -90,11 +89,9 @@ def enterLetter():
     else:
         verifyLetter(letters)
         if not '-' in hidden_word:
-           return True
+            return True
         else:
             return False
-        
-
 
 
 def verifyWord(letters):
@@ -120,44 +117,35 @@ def verifyLetter(letter):
             lettersEntered.append(letter)
     if not repeatedLetter:
         # validate if the letter is in the word
-        if (not letter in word ):        
-            tries +=1
+        if (not letter in word):
+            tries += 1
             print('La letra "{}" no se encuentra en la palabra. '.format(letter))
         else:
             replaceLetter(letter)
-        
-        
+
+
 def replaceLetter(letter):
     global word
     global hidden_word
     for index, x in enumerate(word):
         if x == letter:
             hidden_word[index] = letter
-    
-            
+
+
 # is validated if you missed all your chances
 def gameOver():
     if tries == 7:
-         scream.display_board(hidden_word, tries,IMAGES)
-         scream.message(False, word)
-         return True
+        scream.display_board(hidden_word, tries, IMAGES)
+        scream.message(False, word)
+        return True
     else:
         return False
 
+
 def win():
-    scream.message(True,word)
-    
-         
+    scream.message(True, word)
 
 
 if __name__ == '__main__':
     scream.welcome()
     run()
-    
-
-
-    
-   
-
-
-

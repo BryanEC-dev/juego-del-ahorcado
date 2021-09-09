@@ -2,6 +2,7 @@
 
 
 def welcome():
+   
     print('-------------------------------------')
     print('|                                   |') 
     print('| BIENVENIDOS AL JUEGO DEL AHORCADO |') 
@@ -12,22 +13,22 @@ def welcome():
     print('|            REGLAS                  |')
     print('-------------------------------------')
     print('1. Tienes 7 intentos para adivinar la palabra')   
-    print('2. Puedes ingresar una letra o una palabra completa')   
+    print('2. Puedes ingresar una letra o la palabra completa')   
     print('3. Si luego de solicitar tres pistas no adivinas la palabra perderas')
 
     print("\n Suerte....")   
 
 
 def display_board(hidden_word, tries,IMAGES):
+    """
+    Muestra la imagen del ahorcado y la palabra oculta.
+    """
     print(IMAGES[tries])
     print('')
     print(hidden_word)
     print('----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+')
 
 def message(win,word):
-    """
-    docstring
-    """
     if win:
         print('')
         print('¡Felicitaciones! Ganaste!!!! La palabra es: {}'.format(word))

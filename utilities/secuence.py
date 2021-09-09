@@ -70,10 +70,11 @@ def images():
     return IMAGES
 
 
-""" get a random word """
-
 
 def randomWord(WORDS):
+    """ 
+        get a random word 
+    """
     length = len(WORDS) - 1
     idx = random.randint(0, length)
     return WORDS[idx]
