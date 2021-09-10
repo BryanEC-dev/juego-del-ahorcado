@@ -3,6 +3,8 @@ __pycache__/
 venv/
 utilities/__pycache__/
 repository/__pycache__/
+controller/__pycache__/
+view/__pycache__/
 .vscode/
 .env
-.config/properties.conf
+config/properties.conf

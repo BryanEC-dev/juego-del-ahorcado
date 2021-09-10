@@ -1,13 +1,14 @@
 import mysql.connector
+from config.configuration import config
 
 
 class conection:
     def __init__(self):
         self.myDb = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="984704jbldhdir.",
-            database='words2'
+            host=config.get('DB','HOST'),
+            user=config.get('DB','USER'),
+            password=config.get('DB','PASSWORD'),
+            database=config.get('DB','DATABASE')
         )
         self.myCursor = self.myDb.cursor()
 
@@ -18,9 +19,3 @@ class conection:
         self.result = self.myCursor.fetchall()
 
         return self.result
-
-
-
-
-
-

@@ -71,7 +71,7 @@ def images():
 
 
 
-def randomWord(WORDS):
+def random_words(WORDS):
     """ 
         get a random word 
     """

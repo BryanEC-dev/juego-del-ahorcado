@@ -12,14 +12,13 @@ def welcome():
     print('|                                   |')
     print('-------------------------------------')
     print('\n')
-    print('-------------------------------------')
-    print('|            REGLAS                  |')
-    print('-------------------------------------')
+    print('---------------------------------------------------------------------')
+    print('|                            REGLAS                                  |')
+    print('---------------------------------------------------------------------')
     print('1. Tienes 7 intentos para adivinar la palabra.')
-    print('2. Puedes ingresar una letra o la palabra completa')
-    print('3. Si luego de solicitar tres pistas no adivinas la palabra perderás')
+    print('2. Puedes ingresar una letra o la palabra completa.')
+    print('3. Si luego de solicitar tres pistas no adivinas la palabra perderás.')
 
-    print("\n Suerte....")
 
 
 def display_board(hidden_word: str, tries: int, images: list) -> None:
@@ -35,7 +34,7 @@ def display_board(hidden_word: str, tries: int, images: list) -> None:
     print(images[tries])
     print('')
     print(hidden_word)
-    print('----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+ ----+')
+    print('----+'* len(hidden_word))
 
 
 def message(win: bool, word: str) -> None:
