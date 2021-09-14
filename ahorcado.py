@@ -1,12 +1,14 @@
 """
 This little code belongs to an implementation of the classic game of hangman
 """
+from colorama import init, Fore, Back, Style
+import time
+
 from view.scream import welcome, display_board, message
 from repository.conection import conection
 import utilities.secuence as secuence
 from controller.word import enter_letter, verify_word, verify_letter, replace_letter, track
 from controller.game import win, game_over
-import time
 
 numberHelp = 0
 tries = 0
@@ -21,7 +23,7 @@ IMAGES = secuence.images()
 # get the words to play
 db = conection()
 WORDS = db.getAllWords()
-
+init()
 
 def run():
     global word
@@ -35,6 +37,7 @@ def run():
     hidden_word = ['-'] * len(word)
 
     while True:
+        
         display_board(hidden_word, tries, IMAGES)
         try:
             option = int(input("""
@@ -56,9 +59,11 @@ def run():
                 if response['word']:
                     if verify_word(response['letters'],word):
                         win(word)
+                        print(Back.RESET)
                         break
                     tries +=1
-                    print(f"La palabra {response['letters']} no es la correcta")
+                    print(Fore.RED+"La palabra {} no es la correcta".format(response['letters']))
+                    print(Back.RESET + Fore.RESET)
                     time.sleep(3)
                     continue
                 elif response['letter']:
@@ -72,14 +77,18 @@ def run():
                   if not '-' in hidden_word:
                         win(word)
                         time.sleep(2)
+                        print(Back.RESET)
                         break
                 
                 if game_over(hidden_word,tries,IMAGES,word):
+                    print(Back.RESET)
                     break
             elif option == 3:
                 break
+                print(Back.RESET)
             else:
                 print('La opción ingresada es incorrecta')
+                print(Back.RESET)
         except ValueError as error:
             print('--- SOLO SE PUEDE INGRESAR NÚMEROS ---')
             time.sleep(3)

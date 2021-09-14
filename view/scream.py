@@ -3,21 +3,21 @@
 """
 
 from config.configuration import config
-
+from colorama import init, Fore, Back, Style
 
 def welcome():
     print('-------------------------------------')
     print('|                                   |')
-    print('| BIENVENIDOS AL JUEGO DEL AHORCADO |')
+    print('|' +Fore.GREEN +' BIENVENIDOS AL JUEGO DEL AHORCADO ' + Fore.RESET + '|')
     print('|                                   |')
     print('-------------------------------------')
     print('\n')
     print('---------------------------------------------------------------------')
-    print('|                            REGLAS                                  |')
+    print('|' +Fore.GREEN +'                                 REGLAS                             ' + Fore.RESET + '|')
     print('---------------------------------------------------------------------')
-    print('1. Tienes 7 intentos para adivinar la palabra.')
-    print('2. Puedes ingresar una letra o la palabra completa.')
-    print('3. Si luego de solicitar tres pistas no adivinas la palabra perderás.')
+    print(Fore.CYAN +'1. ' +Fore.RESET + 'Tienes 7 intentos para adivinar la palabra.')
+    print(Fore.CYAN +'2. ' +Fore.RESET + 'Puedes ingresar una letra o la palabra completa.')
+    print(Fore.CYAN +'3. ' +Fore.RESET + 'Si luego de solicitar tres pistas no adivinas la palabra perderás.')
 
 
 
@@ -60,5 +60,6 @@ def display_lives(total_lives: int, lost_lives: int) -> None:
     :return: None
     """
     pending_lives = total_lives - lost_lives
-    lives = ('vidas: ' + '\u2661' * lost_lives + '\u2665' * pending_lives)
+    lives = (Fore.BLUE +'vidas: ' + Fore.RESET + '' + '\u2661' * lost_lives + '\u2665' * pending_lives)
+    print('\n')
     print(lives.ljust(100, ' '))
