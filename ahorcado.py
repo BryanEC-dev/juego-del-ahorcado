@@ -4,10 +4,10 @@ This little code belongs to an implementation of the classic game of hangman
 from colorama import init, Fore, Back, Style
 import time
 
-from view.scream import welcome, display_board, message
+from view.scream import welcome, display_board, message, help_game
 from repository.conection import conection
 import utilities.secuence as secuence
-from controller.word import enter_letter, verify_word, verify_letter, replace_letter, track
+from controller.word import enter_letter, verify_word, verify_letter, replace_letter, track, review_track
 from controller.game import win, game_over
 
 numberHelp = 0
@@ -41,9 +41,11 @@ def run():
         display_board(hidden_word, tries, IMAGES)
         try:
             option = int(input("""
-                1.Obtener una pista
-                2.Ingresar una letra o palabra   
-                3.Salir
+                1. Obtener una pista
+                2. Ingresar una letra o palabra
+                3. Revisar pistas 
+                4. Manual del juego 
+                5. Salir
             """))
 
             if option == 1:
@@ -84,11 +86,13 @@ def run():
                     print(Back.RESET)
                     break
             elif option == 3:
+                review_track(random_word,numberHelp)
+            elif option == 4:
+                help_game()
+            elif option == 5:
                 break
-                print(Back.RESET)
             else:
                 print('La opción ingresada es incorrecta')
-                print(Back.RESET)
         except ValueError as error:
             print('--- SOLO SE PUEDE INGRESAR NÚMEROS ---')
             time.sleep(3)

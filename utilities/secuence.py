@@ -80,5 +80,4 @@ def random_words(WORDS):
     return WORDS[idx]
 
 
-def help(randomWord, numberHelp):
-    return
+

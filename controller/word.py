@@ -1,11 +1,11 @@
 import time
-
+from colorama import init, Fore, Back, Style
 # it is verified if the word or letter I entered is correct
 def enter_letter():
     letter = False
     word = False
     
-    letters = input("Ingrese una letra o una palabra: ")
+    letters = input(Fore.CYAN +"Ingrese una letra o una palabra: " +Fore.RESET)
     letters = letters.lower()
     
     if len(letters) > 1:
@@ -43,26 +43,39 @@ def replace_letter(letter,word,hidden_word, tries):
 
     if (not letter in word):
             print('La letra "{}" no se encuentra en la palabra. '.format(letter))
+            time.sleep(2)
             tries += 1
     else:
         for index, x in enumerate(word):
             if x == letter:
                 hidden_word[index] = letter
-    
+        print('La letra "{}" si se encuentra en la palabra. '.format(letter))
+        time.sleep(2)
     return hidden_word, tries
         
 def track(number_help,random_word):
     if number_help == 3:
-        print("ya no tienes mas pistas")
+        print(Fore.RED + "ya no tienes mas pistas" + Fore.RESET)
         time.sleep(3)
     else:
         # 2 is added by the position of the tracks in the database
-        idx = number_help + 1  
-        print(f'Pista {idx}: {random_word[idx]}' )
+        idx = number_help + 1 
+        track = f'Pista {idx}: '
+        print(Fore.CYAN + track + Fore.RESET +  random_word[idx])
         number_help += 1
         time.sleep(5)
     
     return number_help
+
+def review_track(word, track):
+    print('\n-----------------------------------------------------------')
+    print('Palabra de {} letras'.format(len(word[0])))
+    print('\nPistas reveladas:')
+    if track >= 1 : print(Fore.CYAN + 'Pista 1:' + Fore.RESET +  word[1])
+    if track >= 2 : print(Fore.CYAN + 'Pista 2:'+ Fore.RESET +  word[2])
+    if track >= 3 : print(Fore.CYAN + 'Pista 3:' + Fore.RESET +  word[3])
+    print('-----------------------------------------------------------\n')
+    
         
     
     

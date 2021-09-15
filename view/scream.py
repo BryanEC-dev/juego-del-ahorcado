@@ -4,6 +4,7 @@
 
 from config.configuration import config
 from colorama import init, Fore, Back, Style
+import time
 
 def welcome():
     print('-------------------------------------')
@@ -17,7 +18,7 @@ def welcome():
     print('---------------------------------------------------------------------')
     print(Fore.CYAN +'1. ' +Fore.RESET + 'Tienes 7 intentos para adivinar la palabra.')
     print(Fore.CYAN +'2. ' +Fore.RESET + 'Puedes ingresar una letra o la palabra completa.')
-    print(Fore.CYAN +'3. ' +Fore.RESET + 'Si luego de solicitar tres pistas no adivinas la palabra perderás.')
+    print(Fore.CYAN +'3. ' +Fore.RESET + 'Luego de solicitar todas las pistas tendras una sola vida')
 
 
 
@@ -46,10 +47,16 @@ def message(win: bool, word: str) -> None:
     """
     if win:
         print('')
-        print('¡Felicitaciones! Ganaste!!!! La palabra es: {}'.format(word))
+        print('---------------------------------------------------------------------')
+        print('¡Felicitaciones! Ganaste!!!! La palabra es:' +Fore.GREEN + word + Fore.RESET )
+        print('---------------------------------------------------------------------')
+        #print('¡Felicitaciones! Ganaste!!!! La palabra es: {}'.format(word))
     else:
         print('')
-        print('¡ Perdiste!, la palabra correcta era {}'.format(word))
+        print('---------------------------------------------------------------------')
+        print('Perdiste! , la palabra correcta era: ' +Fore.GREEN + word + Fore.RESET )
+        print('---------------------------------------------------------------------')
+       
 
 
 def display_lives(total_lives: int, lost_lives: int) -> None:
@@ -63,3 +70,14 @@ def display_lives(total_lives: int, lost_lives: int) -> None:
     lives = (Fore.BLUE +'vidas: ' + Fore.RESET + '' + '\u2661' * lost_lives + '\u2665' * pending_lives)
     print('\n')
     print(lives.ljust(100, ' '))
+
+def help_game():
+    print('---------------------------------------------------------------------')
+    print('|' +Fore.GREEN +'                                 ayuda                             ' + Fore.RESET + '|')
+    print('---------------------------------------------------------------------')
+    print(Fore.CYAN +'1. ' +Fore.RESET + 'Solo puedes obtener un total de 3 pistas presionando la opción 1.')
+    print(Fore.CYAN +'2. ' +Fore.RESET + 'Puedes ingresar una letra o la palabra completa en  la opción 2.')
+    print(Fore.CYAN +'3. ' +Fore.RESET + 'Puesdes revisar el número de letras y pistas que obtuviste en el juego en la opción 3.')
+    print(Fore.CYAN +'5. ' +Fore.RESET + 'Puesdes salir del juego en la opción 5.')
+    time.sleep(5)
+    
