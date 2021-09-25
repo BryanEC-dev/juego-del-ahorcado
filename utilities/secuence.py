@@ -77,7 +77,7 @@ def random_words(WORDS):
     """
     length = len(WORDS) - 1
     idx = random.randint(0, length)
-    return WORDS[idx]
+    return WORDS[idx], idx
 
 
 

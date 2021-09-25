@@ -19,3 +19,20 @@ class conection:
         self.result = self.myCursor.fetchall()
 
         return self.result
+
+    
+    def insert_score(self, name, score):
+        sql = "INSERT INTO points(first_name, score) VALUES (%s, %s)"
+        val = (name,score)
+        self.myCursor.execute(sql, val)
+        
+        self.myDb.commit()
+        
+        return self.myCursor.rowcount
+    
+    def get_score(self):
+        sql = "Select * from points"
+        self.myCursor.execute(sql)
+        self.result = self.myCursor.fetchall()
+
+        return self.result

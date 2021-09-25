@@ -81,3 +81,14 @@ def help_game():
     print(Fore.CYAN +'5. ' +Fore.RESET + 'Puesdes salir del juego en la opción 5.')
     time.sleep(5)
     
+
+def configuration_game():
+    print('configuracion:')
+    print('Este juego tiene 3 niveles, escoga uno de los niveles')
+    level = int(input('Ingrese el nivel que desea'))
+    print('Cada nivel tiene 4 palabras')
+    print('Sistma de puntaje:')
+    print('el puntaje obtenido en cada palabra equivale al número de vidas')
+    print('Si pierde en alguna palabra no obtendra puntos y solo se quedara con los puntos de la palabra anterior')
+    time.sleep(6)
+    
