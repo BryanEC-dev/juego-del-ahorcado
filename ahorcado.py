@@ -4,7 +4,7 @@ This little code belongs to an implementation of the classic game of hangman
 from colorama import init, Fore, Back, Style
 import time
 
-from view.scream import welcome, display_board, message, help_game, configuration_game, show_score
+from view.scream import welcome, display_board, message, help_game, configuration_game, show_score,rules
 from repository.conection import conection
 import utilities.secuence as secuence
 from controller.word import enter_letter, verify_word, verify_letter, replace_letter, track, review_track
@@ -110,7 +110,7 @@ def run(random_word: str):
 
 
 def start(word_):
-    welcome()
+    rules()
     run(word_)
 
 def initial_setup():
@@ -118,9 +118,13 @@ def initial_setup():
     global db
     option_one_enabled = True
     _contador = False
+    welcome()
     while True:
         try:
             option = int(input("""
+                Menu principal del juego
+                ------------------------
+                
                 1. Jugar
                 2. Continuar
                 3. Puntaje
@@ -141,12 +145,10 @@ def initial_setup():
                     # obtener la palabra para el juego
                     random_word, idx = secuence.random_words(list_word)
                     # eliminar la palabra de la lista
-                    print(list_word)
                     list_word.pop(idx)
-                    print(list_word)
                     start(random_word)
                 else:
-                    print('El juego ya fue iniciado, use la opción 2 para continuar')
+                    print(Fore.RED +'El juego ya fue iniciado, use la opción 2 para continuar'+ Fore.RESET)
                 option_one_enabled = False
             elif option == 2:
                 if not option_one_enabled:

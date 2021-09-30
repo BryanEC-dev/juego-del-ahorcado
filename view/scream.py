@@ -7,20 +7,21 @@ from colorama import init, Fore, Back, Style
 import time
 
 def welcome():
-    print('-------------------------------------')
-    print('|                                   |')
-    print('|' +Fore.GREEN +' BIENVENIDOS AL JUEGO DEL AHORCADO ' + Fore.RESET + '|')
-    print('|                                   |')
-    print('-------------------------------------')
+    print(' '* 14 + '-------------------------------------')
+    print(' '* 14 +'|                                   |')
+    print(' '* 14 +'|' +Fore.GREEN +' BIENVENIDOS AL JUEGO DEL AHORCADO ' + Fore.RESET + '|')
+    print(' '* 14 +'|                                   |')
+    print(' '* 14 +'-------------------------------------')
     print('\n')
+    
+
+def rules():
     print('---------------------------------------------------------------------')
     print('|' +Fore.GREEN +'                                 REGLAS                             ' + Fore.RESET + '|')
     print('---------------------------------------------------------------------')
     print(Fore.CYAN +'1. ' +Fore.RESET + 'Tienes 7 intentos para adivinar la palabra.')
     print(Fore.CYAN +'2. ' +Fore.RESET + 'Puedes ingresar una letra o la palabra completa.')
     print(Fore.CYAN +'3. ' +Fore.RESET + 'Luego de solicitar todas las pistas tendras una sola vida')
-
-
 
 def display_board(hidden_word: str, tries: int, images: list) -> None:
     """
