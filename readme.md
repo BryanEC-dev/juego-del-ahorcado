@@ -32,7 +32,9 @@ In order to run the program you have to carry out the following points.
 
 5. configure the HOST, USER, PASSWORD, DATABASE values in the config / properties.conf file for the connection to the database.
 
-6. Start the project with the command python hanged.py
+6. go to the script folder and run the .sql file on your configured database. (for this scenario our base is called words)
+
+7. Start the project with the command python hanged.py
 
 the mentioned commands were used in a windows environment, please check the commands for your respective operating system
 
