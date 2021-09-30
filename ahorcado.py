@@ -116,11 +116,17 @@ def start(word_):
 def initial_setup():
     global list_word
     global db
+    global tries
+    global numberHelp
     option_one_enabled = True
     _contador = False
     welcome()
     while True:
         try:
+            tries = 0
+            numberHelp = 0
+            letters_entered = []
+            
             option = int(input("""
                 Menu principal del juego
                 ------------------------
@@ -158,9 +164,7 @@ def initial_setup():
                         # obtener la palabra para el juego
                         random_word, idx = secuence.random_words(list_word)
                         # eliminar la palabra de la lista
-                        print(list_word)
                         list_word.pop(idx)
-                        print(list_word)
                         start(random_word)
                 else:
                     print('Debe iniciar el juego primero')
@@ -170,21 +174,22 @@ def initial_setup():
                 
             elif option == 4:
                 
-                print( f'Tu puntaje actual es: {read_score()}')
+                print( f'Tu puntaje actual es: {Fore.RED} {read_score()} {Fore.RESET}')
                 if read_score() > 0:
                     print('Has acertado las siguientes palabras:\n')
                     for x in right_words:
                         print(f'* {x}')
-                    response = input('Desea finalizar el juego y guardar su puntaje ? Y/N')
+                    print('\n')
+                    response = input('Desea finalizar el juego y guardar su puntaje ? Y/N \n')
                     
-                    if response == 'Y':
+                    if response.strip().upper() == 'Y':
                         name = input('Ingrese su nombre para el registro: ')
                         
                         db.insert_score(name, read_score())
                         print('Registrando en base .....')
                         time.sleep(3)
                         break
-                    elif response == 'N':
+                    elif response.strip().upper() == 'N':
                         continue
                     else:
                         print('El valor ingresado no es valido')
