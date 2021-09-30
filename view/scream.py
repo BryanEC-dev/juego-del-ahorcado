@@ -92,3 +92,22 @@ def configuration_game():
     print('Si pierde en alguna palabra no obtendra puntos y solo se quedara con los puntos de la palabra anterior')
     time.sleep(6)
     
+
+def show_score(scores: list) -> None:
+    """
+
+    :param points: list with scores
+    :return:None
+    """
+    print('')
+    print('------------------------------------------------')
+    print('|'+Fore.CYAN+'Nombre        '+Fore.RESET+'| '+Fore.CYAN+'Puntaje'+Fore.RESET+'|'+Fore.CYAN+'Fecha                 '+Fore.RESET +'|')
+    print('------------------------------------------------')
+    for score in scores:
+        data = list(score)
+        print(' {} {}  {}'.format(data[0] + ' '*(14 - len(data[0])), str(data[1]) + ' '*6,str(data[2])))
+    print('------------------------------------------------')
+    print('\n')
+        
+    
+    

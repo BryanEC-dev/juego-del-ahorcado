@@ -4,7 +4,7 @@ This little code belongs to an implementation of the classic game of hangman
 from colorama import init, Fore, Back, Style
 import time
 
-from view.scream import welcome, display_board, message, help_game, configuration_game
+from view.scream import welcome, display_board, message, help_game, configuration_game, show_score
 from repository.conection import conection
 import utilities.secuence as secuence
 from controller.word import enter_letter, verify_word, verify_letter, replace_letter, track, review_track
@@ -163,15 +163,8 @@ def initial_setup():
                 else:
                     print('Debe iniciar el juego primero')
             elif option == 3:
-                print( f'Mostrando puntajes de la bd')
                 score_list = db.get_score()
-                print(score_list)
-                
-                for scores in score_list:
-                    data = list(scores)
-                    print('Nombre - Puntaje - Fecha')
-                    print(f'{data[0]} - {data[1]} - {data[2]}')
-                
+                show_score(score_list)
                 
             elif option == 4:
                 
